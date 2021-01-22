@@ -1,16 +1,16 @@
 package api
 
 import (
+	"github.com/beijibeijing/viper"
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
-	"myself/mall/handler"
-	"myself/mall/util"
+	"myself/mall/conf"
+	"time"
 )
 
 func Ping(c *gin.Context) {
 	data := make(map[string]interface{})
 	data["project_name"] = viper.GetString("project.name")
-	data["time"] = util.StrNow()
+	data["time"] = time.Now()
 
-	handler.SendResponse(c, nil, "", data)
+	conf.SendResponse(c, nil, "", data, "chs")
 }

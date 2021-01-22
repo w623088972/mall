@@ -15,7 +15,8 @@ func InitRouter(router *gin.Engine) {
 	config.AllowAllOrigins = true
 
 	router.Use(cors.New(config))
-	group := router.Group("mall", middleware.PrepareContext())
+	//group := router.Group("mall", middleware.PrepareContext())
+	group := router.Group("mall", middleware.AuthMiddleware("back"))
 	group.GET("ping", Ping)
 
 	goodsApi.AddRoute(group)

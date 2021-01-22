@@ -1,0 +1,36 @@
+#project
+project:
+  name: mall #名称
+  port: :8080 #端口
+  env: local #环境，本地：local 测试：develop 线上：production
+  runmode: debug #开发模式：debug release test
+
+#log
+log:
+  path: log/ #路径
+  name: now.log #名称
+  truePath: /go/src/myself/mall/log/ #绝对路径
+  json: true #格式，false 时为text格式，线上时使用 true
+  color: true #text 时 true，线上使用json时使用 false 暂时不用配置
+  localTest: false #false 时online线上  true 本地测试 暂时不用配置
+
+#mysql
+mysql:
+  host: localhost
+  port: :3306
+  database: mall
+  username: root
+  password: root
+  log: true
+  maxOpenConns: 500
+  maxIdleConns: 50
+
+#redis
+redis:
+  host: localhost
+  port: :6379
+  database: 1
+  username:
+  password:
+  maxIdle: 100
+  maxActive: 1000

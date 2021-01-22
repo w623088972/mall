@@ -1,6 +1,7 @@
 package errno
 
 var (
+	// Common errors
 	OK      = &Errno{Code: 10000, Message: map[string]string{"en": "OK", "chs": "操作成功!", "cht": "操作成功!"}}
 	Loading = &Errno{Code: 11111, Message: map[string]string{"en": "程序员小哥哥正在加急开发哦", "chs": "程序员小哥哥正在加急开发哦!", "cht": "程序员小哥哥正在加急开发哦!"}}
 
@@ -43,6 +44,7 @@ var (
 	ErrInviteIsInvalid              = &Errno{Code: 10023, Message: map[string]string{"en": "The invitation has expired", "chs": "该邀请函已失效", "cht": "該邀請函已失效"}}
 	ErrTicketStoreIsOpening         = &Errno{Code: 10041, Message: map[string]string{"en": "The shop has been closed", "chs": "该店铺已歇业", "cht": "該店鋪已歇業"}}
 	ErrDeliveryTypeIsValid          = &Errno{Code: 10042, Message: map[string]string{"en": "The delivery method is not within the specified time", "chs": "该配送方式不在规定时间内", "cht": "該配送方式不在規定時間內"}}
+	ErrQrCodeInvalid                = &Errno{Code: 10043, Message: map[string]string{"en": "Please show the correct QR code", "chs": "请出示正确二维码", "cht": "請出示正確二維碼"}}
 
 	//10105不能修改 小程序/h5根据此错误码重新登陆
 	ErrTokenInvalid              = &Errno{Code: 10105, Message: map[string]string{"en": "The token was invalid", "chs": "登录凭证失效,请稍后重试或联系客服人员", "cht": "登錄憑證失效,請稍後重試或聯繫客服人員"}}
@@ -70,6 +72,7 @@ var (
 	ErrUserNotBindApple          = &Errno{Code: 10124, Message: map[string]string{"en": "User is not bound to Apple", "chs": "用户未绑定苹果", "cht": "用戶未綁定蘋果"}}
 	ErrAppleFailed               = &Errno{Code: 10125, Message: map[string]string{"en": "Apple authorization failed. Please try again later or contact customer service", "chs": "苹果授权未成功,请稍后重试或联系客服人员", "cht": "蘋果授權未成功,請稍後重試或聯繫客服人員"}}
 	ErrAppleTokenInvalid         = &Errno{Code: 10126, Message: map[string]string{"en": "The token was invalid", "chs": "苹果凭证无效,请稍后重试或联系客服人员", "cht": "蘋果憑證無效,請稍後重試或聯繫客服人員"}}
+	ErrCodeInvalid               = &Errno{Code: 10127, Message: map[string]string{"en": "The code was invalid", "chs": "验证码已失效", "cht": "驗證碼已失效"}}
 
 	ErrUploadImgFailed = &Errno{Code: 10201, Message: map[string]string{"en": "Upload image Failed", "chs": "上传图片失败,请稍后重试或联系客服人员", "cht": "上傳圖片失敗,請稍後重試或聯繫客服人員"}}
 	ErrStsFailed       = &Errno{Code: 10202, Message: map[string]string{"en": "AliyunSts Failed", "chs": "阿里云sts授权未成功,请稍后重试或联系客服人员", "cht": "阿里雲sts授權未成功,請稍後重試或聯繫客服人員"}}
@@ -139,6 +142,7 @@ var (
 	ErrNotHaveSceneAuth     = &Errno{Code: 30220, Message: map[string]string{"en": "The store did not get permission for this session", "chs": "店铺未获得该场次权限", "cht": "店鋪未獲得該場次權限"}}
 	ErrBraceletNotUser      = &Errno{Code: 30221, Message: map[string]string{"en": "The bracelet is not associated with the user", "chs": "该手环未关联用户", "cht": "該手環為關聯用戶"}}
 	ErrWristbandIsHaveUser  = &Errno{Code: 30222, Message: map[string]string{"en": "The association failed and the account has been associated", "chs": "关联失败，该账号已被关联", "cht": "關聯失敗，該賬號已被關聯"}}
+	ErrSpecExpire           = &Errno{Code: 30223, Message: map[string]string{"en": "Expired", "chs": "已过期", "cht": "已過期"}}
 
 	ErrHomiezNoMobile = &Errno{Code: 30301, Message: map[string]string{"en": "The orderId or the mobile is wrong", "chs": "手机号或订单号错误,请稍后重试或联系客服人员", "cht": "手機號或訂單號錯誤,請稍後重試或聯繫客服人員"}}
 
@@ -181,6 +185,8 @@ var (
 	ErrGateIsExistEnter = &Errno{Code: 60004, Message: map[string]string{"en": "Admitted today.", "chs": "今日已入场", "cht": "今日已入場。"}}
 	ErrGateIsGrepErr    = &Errno{Code: 60005, Message: map[string]string{"en": "Please enter from the corresponding channel.", "chs": "请从对应通道入场", "cht": "請從對應通道入場"}}
 	ErrInIsNot          = &Errno{Code: 60006, Message: map[string]string{"en": "User has no access", "chs": "用户无入场权限", "cht": "用戶無入場權限"}}
+	ErrNotHaveTicket    = &Errno{Code: 60007, Message: map[string]string{"en": "No e-ticket available", "chs": "无可用电子票", "cht": "無可用電子票"}}
+	ErrUserSpecInvalid  = &Errno{Code: 60008, Message: map[string]string{"en": "Incorrect ticket file", "chs": "票档不正确", "cht": "票檔不正確"}}
 
 	ErrEasemobAPI      = &Errno{Code: 70001, Message: map[string]string{"en": "chat api.", "chs": "聊天", "cht": "聊天"}}
 	ErrMessageTooLarge = &Errno{Code: 70002, Message: map[string]string{"en": "message too large.", "chs": "消息字数超过上限", "cht": "消息字數超過上限"}}
@@ -229,10 +235,51 @@ var (
 	ErrHealthStatusInvalidNoRelationWristband  = &Errno{Code: 300008, Message: map[string]string{"en": "The health status is invalid, and the bracelet cannot be associated", "chs": "健康状态失效，不能关联手环", "cht": "健康狀態失效，不能關聯手環"}}
 	ErrHealthStatusAbnormalNoRelationWristband = &Errno{Code: 300009, Message: map[string]string{"en": "Abnormal health status, unable to associate Bracelet", "chs": "健康状态异常，不能关联手环", "cht": "健康狀態異常，不能關聯手環"}}
 
-	ErrStorePosUserExist = &Errno{Code: 400000, Message: map[string]string{"en": "账号已经存在", "chs": "账号已经存在", "cht": ""}}
-	ErrUserPwdAtypism    = &Errno{Code: 400001, Message: map[string]string{"en": "两次密码不一致", "chs": "两次密码不一致", "cht": ""}}
-	ErrStorePosUserNum   = &Errno{Code: 400002, Message: map[string]string{"en": "Account has reached the upper limit", "chs": "账号已达上限", "cht": ""}}
-	ErrAccountExist      = &Errno{Code: 400003, Message: map[string]string{"en": "Account number already exist", "chs": "账号已存在", "cht": ""}}
+	ErrStorePosUserExist  = &Errno{Code: 400000, Message: map[string]string{"en": "账号已经存在", "chs": "账号已经存在", "cht": ""}}
+	ErrUserPwdAtypism     = &Errno{Code: 400001, Message: map[string]string{"en": "两次密码不一致", "chs": "两次密码不一致", "cht": ""}}
+	ErrStorePosUserNum    = &Errno{Code: 400002, Message: map[string]string{"en": "Account has reached the upper limit", "chs": "账号已达上限", "cht": ""}}
+	ErrAccountExist       = &Errno{Code: 400003, Message: map[string]string{"en": "Account number already exist", "chs": "账号已存在", "cht": ""}}
+	ErrStoreInvalidStatus = &Errno{Code: 400004, Message: map[string]string{"en": "店铺无效,请先生效店铺", "chs": "店铺无效,请先生效店铺", "cht": ""}}
+
+	ErrNoExpCom  = &Errno{Code: 600000, Message: map[string]string{"en": "No avalilable express company", "chs": "无可用快递公司", "cht": ""}}
+	ErrNoProvice = &Errno{Code: 600001, Message: map[string]string{"en": "No province", "chs": "缺少省份信息", "cht": ""}}
+	ErrNoCity    = &Errno{Code: 600002, Message: map[string]string{"en": "No city", "chs": "缺少城市信息", "cht": ""}}
+	ErrNoArea    = &Errno{Code: 600003, Message: map[string]string{"en": "No area", "chs": "缺少区县信息", "cht": ""}}
+
+	//服务
+	ErrServiceOrderTimeout               = &Errno{Code: 500001, Message: map[string]string{"en": "Order timeout, unable to cancel", "chs": "订单超时，不能取消", "cht": "訂單超時，不能取消"}}
+	ErrServiceStatusInvalid              = &Errno{Code: 500002, Message: map[string]string{"en": "Service is off the shelf", "chs": "服务已下架", "cht": "服務已下架"}}
+	ErrServiceTimeStatusInvalid          = &Errno{Code: 500003, Message: map[string]string{"en": "Service time has expired, please re select", "chs": "服务时间已失效，请重新选择", "cht": "服務時間已失效，請重新選擇"}}
+	ErrServicePersonnelTimeStatusInvalid = &Errno{Code: 500004, Message: map[string]string{"en": "Service staff working time not reached, please re select", "chs": "未到服务人员工作时间，请重新选择", "cht": "未到服務人員工作時間，請重新選擇"}}
+	ErrServicePersonnelIsSubscribe       = &Errno{Code: 500005, Message: map[string]string{"en": "The service personnel has been reserved, please select again", "chs": "该服务人员已被预约，请重新选择", "cht": "該服務人員已被預約，請重新選擇"}}
+	ErrBatchNoPeople                     = &Errno{Code: 500006, Message: map[string]string{"en": "No people in this batch", "chs": "该批次无人数", "cht": "該批次無人數"}}
+	ErrWristbandNoTime                   = &Errno{Code: 500007, Message: map[string]string{"en": "The bracelet does not record time", "chs": "该手环未记录时间", "cht": "該手環未記錄時間"}}
+
+	ErrRegisterTimeEnded   = &Errno{Code: 600004, Message: map[string]string{"en": "register time end", "chs": "注册时间已结束", "cht": "註冊時間已結束"}}
+	ErrRegisterTimeNoStart = &Errno{Code: 600006, Message: map[string]string{"en": "register time not begin", "chs": "注册时间尚未开始", "cht": "註冊時間未開始"}}
+	ErrPhotoInvalid        = &Errno{Code: 600007, Message: map[string]string{"en": "Photo invalid", "chs": "照片无效", "cht": "照片無效"}}
+
+	ErrDongYeMobileSingleBallot = &Errno{Code: 700000, Message: map[string]string{"en": "Only one vote is allowed for each mobile phone number", "chs": "每个手机号仅限一次投票", "cht": "每個手機號僅限一次投票"}}
+	ErrDongYeVoteIsOver         = &Errno{Code: 700001, Message: map[string]string{"en": "The voting is over and the list is about to open. Please look forward to it", "chs": "投票已结束，榜单即将开启敬请期待", "cht": "投票已結束，榜單即將開啟敬請期待"}}
+
+	ErrRaveVoteUseUp = &Errno{Code: 800001, Message: map[string]string{"en": "We've run out of votes today. Come back tomorrow", "chs": "今日票数已用完，明日再来吧", "cht": "今日票數已用完，明日再來吧"}}
+
+	ErrTempleNotExist                = &Errno{Code: 900001, Message: map[string]string{"en": "Temples don't exist", "chs": "寺庙不存在", "cht": "寺廟不存在"}}
+	ErrDeviceGroupNotExist           = &Errno{Code: 900002, Message: map[string]string{"en": "Device group does not exist", "chs": "设备组不存在", "cht": "設備組不存在"}}
+	ErrSoundNotExist                 = &Errno{Code: 900003, Message: map[string]string{"en": "The sound number does not exist", "chs": "响数不存在", "cht": "響數不存在"}}
+	ErrBlessingNotExist              = &Errno{Code: 900004, Message: map[string]string{"en": "There is no blessing", "chs": "祝福语不存在", "cht": "祝福語不存在"}}
+	ErrTempleStatusInvalid           = &Errno{Code: 900005, Message: map[string]string{"en": "Temples don't exist", "chs": "寺庙不存在", "cht": "寺廟不存在"}}
+	ErrDeviceGroupStatusInvalid      = &Errno{Code: 900006, Message: map[string]string{"en": "Device group does not exist", "chs": "设备组不存在", "cht": "設備組不存在"}}
+	ErrSoundStatusInvalid            = &Errno{Code: 900007, Message: map[string]string{"en": "The sound number does not exist", "chs": "响数不存在", "cht": "響數不存在"}}
+	ErrBlessingStatusInvalid         = &Errno{Code: 900008, Message: map[string]string{"en": "There is no blessing", "chs": "祝福语不存在", "cht": "祝福語不存在"}}
+	ErrOrderIsAllocate               = &Errno{Code: 900009, Message: map[string]string{"en": "Split account", "chs": "已分账", "cht": "已分賬"}}
+	ErrDeviceMacIsExist              = &Errno{Code: 900010, Message: map[string]string{"en": "Device MAC address already exists", "chs": "设备MAC地址已存在", "cht": "設備MAC地址已存在"}}
+	ErrDeviceGroupIsRelation         = &Errno{Code: 900011, Message: map[string]string{"en": "Device to associate device groups", "chs": "设备已关联设备组", "cht": "設備已關聯設備組"}}
+	ErrAllocateRatio                 = &Errno{Code: 900012, Message: map[string]string{"en": "Distribution ratio error", "chs": "分配比率错误", "cht": "分配比率錯誤"}}
+	ErrAccountRepeat                 = &Errno{Code: 900013, Message: map[string]string{"en": "Duplicate account number", "chs": "账号重复", "cht": "賬號重複"}}
+	ErrAllocateNotExist              = &Errno{Code: 900014, Message: map[string]string{"en": "Not yet allocated", "chs": "尚未分配", "cht": "尚未分配"}}
+	ErrTempleAllocateAccountNotExist = &Errno{Code: 900015, Message: map[string]string{"en": "The assigned account number is empty", "chs": "寺庙分配账号为空", "cht": "寺廟分配賬號為空"}}
+	ErrAllocateAccountAmount         = &Errno{Code: 900016, Message: map[string]string{"en": "The amount allocated to an account is not more than 1 yuan", "chs": "某个账号分配金额不大于一元", "cht": "某個賬號分配金額不大於一元"}}
 )
 
 var (

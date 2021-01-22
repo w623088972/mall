@@ -2,7 +2,7 @@ package goods
 
 import (
 	"github.com/gin-gonic/gin"
-	"myself/mall/handler"
+	"myself/mall/conf"
 	goodsM "myself/mall/model/goods"
 	"strconv"
 )
@@ -13,21 +13,21 @@ func GoodsInfo(c *gin.Context) {
 	//获取商品详情
 	goods, err := goodsM.GoodsInfo(goodsId)
 	if err != nil {
-		handler.SendResponse(c, nil, "GoodsInfo goodsM.GoodsInfo failed. err is "+err.Error(), nil)
+		conf.SendResponse(c, nil, "GoodsInfo goodsM.GoodsInfo failed. err is "+err.Error(), nil, "chs")
 		return
 	}
 
 	//获取商品规格
 	goodsSpecs, err := goodsM.GoodsSpecList(goodsId)
 	if err != nil {
-		handler.SendResponse(c, nil, "GoodsInfo goodsM.GoodsSpecList failed. err is "+err.Error(), nil)
+		conf.SendResponse(c, nil, "GoodsInfo goodsM.GoodsSpecList failed. err is "+err.Error(), nil, "chs")
 		return
 	}
 	for _, val := range goodsSpecs {
 		//获取商品属性
 		goodsAttributes, err := goodsM.GoodsAttributeList(goodsId, val.SpecId)
 		if err != nil {
-			handler.SendResponse(c, nil, "GoodsInfo goodsM.GoodsAttributeList failed. err is "+err.Error(), nil)
+			conf.SendResponse(c, nil, "GoodsInfo goodsM.GoodsAttributeList failed. err is "+err.Error(), nil, "chs")
 			return
 		}
 		val.GoodsAttributes = goodsAttributes
@@ -36,14 +36,14 @@ func GoodsInfo(c *gin.Context) {
 	//获取商品sku
 	sku, err := goodsM.SkuList(goodsId)
 	if err != nil {
-		handler.SendResponse(c, nil, "GoodsInfo goodsM.GoodsSpecList failed. err is "+err.Error(), nil)
+		conf.SendResponse(c, nil, "GoodsInfo goodsM.GoodsSpecList failed. err is "+err.Error(), nil, "chs")
 		return
 	}
 	for _, val := range sku {
 		//获取商品sku属性
 		skuAttributes, err := goodsM.SkuAttributeList(val.Id)
 		if err != nil {
-			handler.SendResponse(c, nil, "GoodsInfo goodsM.SkuAttributeList failed. err is "+err.Error(), nil)
+			conf.SendResponse(c, nil, "GoodsInfo goodsM.SkuAttributeList failed. err is "+err.Error(), nil, "chs")
 			return
 		}
 		val.Combines = skuAttributes
@@ -54,5 +54,5 @@ func GoodsInfo(c *gin.Context) {
 	data["goods_specs"] = goodsSpecs
 	data["goods_skus"] = sku
 
-	handler.SendResponse(c, nil, "", data)
+	conf.SendResponse(c, nil, "", data, "chs")
 }

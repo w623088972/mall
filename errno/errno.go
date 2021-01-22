@@ -5,8 +5,8 @@ import (
 )
 
 type Errno struct {
-	Code    int               `json:"code"`
-	Message map[string]string `json:"message"` //en英语，chs简中，cht繁中
+	Code    int               `json:"resultCode"`
+	Message map[string]string `json:"showMessage"` //en英语，chs简中，cht繁中
 }
 
 func (err Errno) Error() string {
@@ -19,9 +19,11 @@ func DecodeErr(err error, language string) (int, string, string) {
 	}
 
 	switch typed := err.(type) {
+	//	case *Err:
+	//		return typed.Code, typed.Message, ""
 	case *Errno:
-		log.Println("DecodeErr language is ", language)
-		log.Println("DecodeErr typed.Message[language] is ", typed.Message[language])
+		log.Println("language is ", language)
+		log.Println("typed.Message[language] is ", typed.Message[language])
 		return typed.Code, typed.Message[language], typed.Message["en"]
 	default:
 	}
