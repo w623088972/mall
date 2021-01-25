@@ -22,7 +22,7 @@ type LogLogger struct {
 var LOG *LogLogger
 
 //Init 日志初始化
-func (lg *LogLogger) Init() {
+func (log *LogLogger) Init() {
 	LOG = &LogLogger{
 		Self: GetSelfLog(),
 	}

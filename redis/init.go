@@ -30,45 +30,33 @@ func openRedisDb() *redis.Pool {
 		MaxActive:   viper.GetInt("redis.maxActive"),
 		IdleTimeout: 180 * time.Second,
 		Dial: func() (redis.Conn, error) {
-			redisHost := viper.GetString("redis.host")
-			redisPort := viper.GetString("redis.port")
-			redisPassword := viper.GetString("redis.password")
-			c, err := redis.Dial("tcp", redisHost+redisPort, redis.DialPassword(redisPassword))
+			host := viper.GetString("redis.host")
+			port := viper.GetString("redis.port")
+			password := viper.GetString("redis.password")
+			conn, err := redis.Dial("tcp", host+port, redis.DialPassword(password))
 			if err != nil {
 				conf.LOG.Self.WithFields(logrus.Fields{
-					"redisHost":     redisHost,
-					"redisPassword": redisPassword,
-					"err":           err.Error,
+					"host":     host,
+					"port":     port,
+					"password": password,
+					"err":      err.Error,
 				}).Info("openRedisDb Dial err")
 				return nil, err
 			}
 
-			/* 			c, err := redis.Dial("tcp", redisdbHost)
-			   			if err != nil {
-			   				conf.LOG.Self.WithFields(logrus.Fields{
-			   					"redisdbHost": redisdbHost,
-			   					"redisdbPw":   redisdbPw,
-			   					"err":         err.Error,
-			   				}).Info("openRedisDB Dial err")
-			   				return nil, err
-			   			}
-			   			if redisdbPw != "" {
-			   				if _, err := c.Do("AUTH", redisdbPw); err != nil {
-			   					c.Close()
-			   					if err != nil {
-			   						conf.LOG.Self.WithFields(logrus.Fields{
-			   							"redisdbHost": redisdbHost,
-			   							"redisdbPw":   redisdbPw,
-			   							"err":         err.Error,
-			   						}).Info("openRedisDB AUTH err")
-			   						return nil, err
-			   					}
-			   				}
-			   			} */
+			//选择db
+			_, err = conn.Do("SELECT", viper.GetInt("redis.database"))
+			if err != nil {
+				conf.LOG.Self.WithFields(logrus.Fields{
+					"host":     host,
+					"port":     port,
+					"password": password,
+					"err":      err.Error,
+				}).Info("openRedisDb Do err")
+				return nil, err
+			}
 
-			// 选择db
-			c.Do("SELECT", viper.GetInt("redis.database"))
-			return c, nil
+			return conn, nil
 		},
 		TestOnBorrow: func(c redis.Conn, t time.Time) error {
 			_, err := c.Do("PING")
@@ -81,6 +69,6 @@ func openRedisDb() *redis.Pool {
 		},
 	}
 
-	conf.LOG.Self.Info("Database openRedis done")
+	conf.LOG.Self.Info("openRedisDb openRedis done")
 	return rs
 }
